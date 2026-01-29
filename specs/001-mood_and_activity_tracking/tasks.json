@@ -1,0 +1,83 @@
+[
+    {
+        "name": "001_project_setup",
+        "description": "Initialize the Flutter project structure and add all necessary dependencies to pubspec.yaml. The directory structure from the plan should be created. Definition of Done: pubspec.yaml contains sqflite, path_provider, flutter_local_notifications, provider, and intl. The lib/src directory structure is created. The app should compile and run.",
+        "tests": [
+            "Verify `flutter analyze` passes without errors.",
+            "Verify the app builds and runs on an emulator/device."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    },
+    {
+        "name": "002_data_layer_setup",
+        "description": "Implement the `JournalEntry` data model and the `DatabaseService`. This includes creating the database, the `journal_entries` table, and methods for adding and retrieving entries. Definition of Done: `JournalEntry` class is created with `toMap` and `fromMap`. `DatabaseService` can initialize a database, create the table, insert a `JournalEntry`, and retrieve a list of all `JournalEntry` objects.",
+        "tests": [
+            "Unit test for `JournalEntry` `toMap` and `fromMap`.",
+            "Unit test for `DatabaseService.addEntry` to correctly insert a record.",
+            "Unit test for `DatabaseService.getEntries` to retrieve all records in the correct order."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    },
+    {
+        "name": "003_entry_screen_ui",
+        "description": "Create the UI for the `EntryScreen`. This includes the mood selector widget (emojis), the activity text field, and a 'Save' button. The screen will have its own local state to manage the inputs. No database connection yet. Definition of Done: A screen is visible with 10 selectable emoji icons, a text input field, and a save button. Selecting an emoji updates the UI. Typing in the text field updates the UI.",
+        "tests": [
+            "Widget test for `MoodSelector` to verify that tapping an emoji updates the selection.",
+            "Widget test for `EntryScreen` to verify it contains a `MoodSelector`, a `TextField`, and a `Button`.",
+            "Widget test for `EntryScreen` to verify that the state is updated when inputs change."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    },
+    {
+        "name": "004_save_journal_entry",
+        "description": "Create the `JournalProvider` and connect the `EntryScreen` to it. Implement the logic so that tapping the 'Save' button on the `EntryScreen` persists a `JournalEntry` to the database via the provider and service. Definition of Done: A user can open the `EntryScreen`, select a mood, enter an activity, tap 'Save', and the entry is saved to the SQLite database. After saving, the user is navigated away from the `EntryScreen`.",
+        "tests": [
+            "Unit test for `JournalProvider` to verify it calls `DatabaseService.addEntry`.",
+            "Integration test: Tap 'Save' on `EntryScreen` and verify the data is present in the database."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    },
+    {
+        "name": "005_view_journal_history",
+        "description": "Create the `HistoryScreen` that displays all saved journal entries from the database in a chronological list. The `JournalProvider` will be responsible for fetching the data from the `DatabaseService`. Definition of Done: The `HistoryScreen` displays a list of all entries from the database. Each list item should show the mood (as an emoji), activity text, and timestamp. The list should update automatically if a new entry is added.",
+        "tests": [
+            "Widget test for `HistoryScreen` to verify it correctly displays a list of mock entries.",
+            "Integration test: Add an entry on the `EntryScreen`, navigate to `HistoryScreen`, and verify the new entry is displayed at the top of the list."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    },
+    {
+        "name": "006_home_screen_dashboard",
+        "description": "Implement the `HomeScreen` as the main dashboard. It should provide a button to add a new entry (navigate to `EntryScreen`) and another to view the history (navigate to `HistoryScreen`). It should also display the most recent entry. Definition of Done: The `HomeScreen` is the initial screen of the app. It has two buttons for navigation and displays the latest journal entry if one exists.",
+        "tests": [
+            "Widget test for `HomeScreen` to verify it displays the latest entry from a mock provider.",
+            "Widget test for `HomeScreen` to verify navigation buttons exist and trigger navigation.",
+            "Integration test: Verify tapping 'Add Entry' goes to `EntryScreen` and 'View History' goes to `HistoryScreen`."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    },
+    {
+        "name": "007_hourly_notifications",
+        "description": "Implement the `NotificationService` to schedule a repeating hourly local notification that prompts the user to log their mood and activity. Definition of Done: The app requests notification permissions on first launch. An hourly notification is scheduled. When the app is in the background, a notification appears every hour. Tapping the notification opens the app.",
+        "tests": [
+            "Unit test for `NotificationService` to verify `initialize` and `scheduleHourlyReminder` methods are called correctly."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    },
+    {
+        "name": "008_app_finalization",
+        "description": "Integrate all services and screens. Initialize services in `main.dart`. Set up routing. Add `EmojiHelper` and use it. Polish the UI/UX, handle edge cases (like empty lists), and ensure smooth navigation. Definition of Done: The application is fully functional. All screens are connected. Services are initialized properly. The UI is clean and intuitive.",
+        "tests": [
+            "Unit test for EmojiHelper to verify correct emoji is returned for each mood score."
+        ],
+        "status": "NOT_STARTED",
+        "passes": false
+    }
+]
