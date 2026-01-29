@@ -4,7 +4,7 @@
         "description": "Initialize the Flutter project structure and add all necessary dependencies to pubspec.yaml. The directory structure from the plan should be created. Definition of Done: pubspec.yaml contains sqflite, path_provider, flutter_local_notifications, provider, and intl. The lib/src directory structure is created. The app should compile and run.",
         "tests": [
             "Verify `flutter analyze` passes without errors.",
-            "Verify the app builds and runs on an emulator/device."
+            "Integration test: The app launches successfully."
         ],
         "status": "NOT_STARTED",
         "passes": false
@@ -66,7 +66,8 @@
         "name": "007_hourly_notifications",
         "description": "Implement the `NotificationService` to schedule a repeating hourly local notification that prompts the user to log their mood and activity. Definition of Done: The app requests notification permissions on first launch. An hourly notification is scheduled. When the app is in the background, a notification appears every hour. Tapping the notification opens the app.",
         "tests": [
-            "Unit test for `NotificationService` to verify `initialize` and `scheduleHourlyReminder` methods are called correctly."
+            "Unit test for `NotificationService` to verify `initialize` and `scheduleHourlyReminder` methods are called correctly.",
+            "Integration test: Verify that interacting with the app correctly triggers the notification scheduling logic."
         ],
         "status": "NOT_STARTED",
         "passes": false
@@ -75,6 +76,7 @@
         "name": "008_app_finalization",
         "description": "Integrate all services and screens. Initialize services in `main.dart`. Set up routing. Add `EmojiHelper` and use it. Polish the UI/UX, handle edge cases (like empty lists), and ensure smooth navigation. Definition of Done: The application is fully functional. All screens are connected. Services are initialized properly. The UI is clean and intuitive.",
         "tests": [
+            "Integration test: Perform a full user flow: open app, add entry, view history, and verify all data is displayed correctly.",
             "Unit test for EmojiHelper to verify correct emoji is returned for each mood score."
         ],
         "status": "NOT_STARTED",
