@@ -56,8 +56,8 @@
             "Unit test for `JournalProvider` to verify it calls `DatabaseService.addEntry`.",
             "Integration test: Tap 'Save' on `EntryScreen` and verify the data is present in the database."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "007_view_journal_history",

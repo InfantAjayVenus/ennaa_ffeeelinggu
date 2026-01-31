@@ -1,5 +1,8 @@
+import 'package:ennaa_ffeeelinggu/src/models/journal_entry.dart';
+import 'package:ennaa_ffeeelinggu/src/providers/journal_provider.dart';
 import 'package:ennaa_ffeeelinggu/src/widgets/mood_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EntryScreen extends StatefulWidget {
   const EntryScreen({super.key});
@@ -44,7 +47,21 @@ class _EntryScreenState extends State<EntryScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Save logic will be implemented in a later task
+                final journalProvider =
+                    Provider.of<JournalProvider>(context, listen: false);
+                journalProvider.addEntry(
+                  JournalEntry(
+                    mood: selectedMood,
+                    activity: activityController.text,
+                    timestamp: DateTime.now(),
+                  ),
+                );
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Entry saved!'),
+                  ),
+                );
               },
               child: const Text('Save'),
             ),
