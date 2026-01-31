@@ -46,8 +46,8 @@
             "Widget test for `EntryScreen` to verify it contains a `MoodSelector`, a `TextField`, and a `Button`.",
             "Widget test for `EntryScreen` to verify that the state is updated when inputs change."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "006_save_journal_entry",
