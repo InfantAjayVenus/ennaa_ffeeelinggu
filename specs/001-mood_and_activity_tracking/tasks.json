@@ -35,8 +35,8 @@
             "Unit test for `DatabaseService.addEntry` to correctly insert a record.",
             "Unit test for `DatabaseService.getEntries` to retrieve all records in the correct order."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "005_entry_screen_ui",
