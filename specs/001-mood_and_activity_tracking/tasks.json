@@ -6,8 +6,8 @@
             "Verify `flutter pub get` completes without errors.",
             "Verify `flutter analyze` passes without errors."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "002_project_structure",
