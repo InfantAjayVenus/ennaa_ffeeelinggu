@@ -16,8 +16,8 @@
             "Verify the directory structure matches the plan.",
             "Write a widget test to verify that the main app widget can be rendered without errors."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "003_data_models",
