@@ -4,7 +4,7 @@
         "description": "Initialize the Flutter project structure and add all necessary dependencies to pubspec.yaml. The directory structure from the plan should be created. Definition of Done: pubspec.yaml contains sqflite, path_provider, flutter_local_notifications, provider, and intl. The lib/src directory structure is created. The app should compile and run.",
         "tests": [
             "Verify `flutter analyze` passes without errors.",
-            "Verify the app builds and runs on an emulator/device."
+            "Write a widget test to verify that the main app widget can be rendered without errors."
         ],
         "status": "NOT_STARTED",
         "passes": false
