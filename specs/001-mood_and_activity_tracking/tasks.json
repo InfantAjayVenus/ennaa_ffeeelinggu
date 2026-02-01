@@ -66,8 +66,8 @@
             "Widget test for `HistoryScreen` to verify it correctly displays a list of mock entries.",
             "Integration test: Add an entry on the `EntryScreen`, navigate to `HistoryScreen`, and verify the new entry is displayed at the top of the list."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "008_home_screen_dashboard",
