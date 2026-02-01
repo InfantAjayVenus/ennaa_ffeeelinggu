@@ -3,8 +3,11 @@ import 'package:ennaa_ffeeelinggu/src/providers/journal_provider.dart';
 import 'package:ennaa_ffeeelinggu/src/screens/entry_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 void main() {
+  tz.initializeTimeZones();
   runApp(
     ChangeNotifierProvider(
       create: (context) => JournalProvider(),

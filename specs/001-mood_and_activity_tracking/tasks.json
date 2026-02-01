@@ -86,8 +86,8 @@
         "tests": [
             "Unit test for `NotificationService` to verify `initialize` and `scheduleHourlyReminder` methods are called correctly."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "010_app_finalization",
