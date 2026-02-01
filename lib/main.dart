@@ -1,3 +1,4 @@
+import 'package:ennaa_ffeeelinggu/src/screens/home_screen.dart';
 import 'package:ennaa_ffeeelinggu/src/providers/journal_provider.dart';
 import 'package:ennaa_ffeeelinggu/src/screens/entry_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const EntryScreen(),
+      home: const HomeScreen(),
     );
   }
 }

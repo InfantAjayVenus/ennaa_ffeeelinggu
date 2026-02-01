@@ -77,8 +77,8 @@
             "Widget test for `HomeScreen` to verify navigation buttons exist and trigger navigation.",
             "Integration test: Verify tapping 'Add Entry' goes to `EntryScreen` and 'View History' goes to `HistoryScreen`."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "009_hourly_notifications",
