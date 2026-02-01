@@ -1,5 +1,6 @@
 import 'package:ennaa_ffeeelinggu/src/models/journal_entry.dart';
 import 'package:ennaa_ffeeelinggu/src/providers/journal_provider.dart';
+import 'package:ennaa_ffeeelinggu/src/utils/emoji_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Mood: ${_getEmoji(entry.mood)}',
+                        'Mood: ${EmojiHelper.getEmoji(entry.mood)}',
                         style: const TextStyle(fontSize: 18),
                       ),
                       const SizedBox(height: 8.0),
@@ -67,21 +68,5 @@ class _HistoryScreenState extends State<HistoryScreen> {
         },
       ),
     );
-  }
-
-  String _getEmoji(int mood) {
-    final Map<int, String> emojis = {
-      1: '😭',
-      2: '😞',
-      3: '😧',
-      4: '😦',
-      5: '😐',
-      6: '😏',
-      7: '🙂',
-      8: '😀',
-      9: '😁',
-      10: '😂',
-    };
-    return emojis[mood] ?? '😐';
   }
 }

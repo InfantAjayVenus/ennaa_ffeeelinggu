@@ -95,7 +95,7 @@
         "tests": [
             "Unit test for EmojiHelper to verify correct emoji is returned for each mood score."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     }
 ]

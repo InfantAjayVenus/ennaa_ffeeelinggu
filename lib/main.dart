@@ -1,13 +1,20 @@
 import 'package:ennaa_ffeeelinggu/src/screens/home_screen.dart';
 import 'package:ennaa_ffeeelinggu/src/providers/journal_provider.dart';
 import 'package:ennaa_ffeeelinggu/src/screens/entry_screen.dart';
+import 'package:ennaa_ffeeelinggu/src/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
+
+  final NotificationService notificationService = NotificationService();
+  await notificationService.initialize();
+  await notificationService.scheduleHourlyReminder();
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => JournalProvider(),
