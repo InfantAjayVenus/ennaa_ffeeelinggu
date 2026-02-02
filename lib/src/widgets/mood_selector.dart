@@ -58,18 +58,28 @@ class _MoodSelectorState extends State<MoodSelector> {
         });
         widget.onMoodSelected(entry.key);
       },
-      child: AnimatedScale(
-        scale: isSelected ? 1.5 : 1.0, // Scale animation for visual feedback
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOutBack,
-        child: AnimatedDefaultTextStyle(
-          style: TextStyle(
-            fontSize: isSelected ? 36 : 30, // Font size animation
-            color: isSelected ? Colors.blue : Colors.grey,
-          ),
+      child: ColorFiltered(
+        colorFilter: isSelected
+            ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
+            : const ColorFilter.matrix(<double>[
+                0.2126, 0.7152, 0.0722, 0, 0,
+                0.2126, 0.7152, 0.0722, 0, 0,
+                0.2126, 0.7152, 0.0722, 0, 0,
+                0,      0,      0,      1, 0,
+              ]),
+        child: AnimatedScale(
+          scale: isSelected ? 1.5 : 1.0, // Scale animation for visual feedback
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOutBack,
-          child: Text(entry.value),
+          child: AnimatedDefaultTextStyle(
+            style: TextStyle(
+              fontSize: isSelected ? 36 : 30, // Font size animation
+              color: isSelected ? Colors.blue : Colors.grey,
+            ),
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOutBack,
+            child: Text(entry.value),
+          ),
         ),
       ),
     );

@@ -22,7 +22,20 @@ void main() {
     Finder findAnimatedDefaultTextStyleByEmoji(String emoji) {
       return find.descendant(
         of: find.byWidgetPredicate(
-          (widget) => widget is GestureDetector && (widget.child as AnimatedScale).child is AnimatedDefaultTextStyle && ((widget.child as AnimatedScale).child as AnimatedDefaultTextStyle).child is Text && (((widget.child as AnimatedScale).child as AnimatedDefaultTextStyle).child as Text).data == emoji,
+          (widget) =>
+              widget is GestureDetector &&
+              widget.child is ColorFiltered &&
+              (widget.child as ColorFiltered).child is AnimatedScale &&
+              ((widget.child as ColorFiltered).child as AnimatedScale).child
+                  is AnimatedDefaultTextStyle &&
+              (((widget.child as ColorFiltered).child as AnimatedScale).child
+                          as AnimatedDefaultTextStyle)
+                      .child is Text &&
+              ((((widget.child as ColorFiltered).child as AnimatedScale).child
+                          as AnimatedDefaultTextStyle)
+                      .child as Text)
+                  .data ==
+                  emoji,
         ),
         matching: find.byType(AnimatedDefaultTextStyle),
       );
