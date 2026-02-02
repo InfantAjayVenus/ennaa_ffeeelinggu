@@ -32,7 +32,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('No entries yet. Add your first mood and activity!'), findsOneWidget);
-      expect(find.text('Add New Entry'), findsOneWidget);
+      expect(find.byType(FloatingActionButton), findsOneWidget);
       expect(find.text('View History'), findsOneWidget);
     });
 
@@ -66,7 +66,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Add New Entry'));
+      await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle(); // Wait for the modal to appear
 
       expect(find.byType(EntryScreen), findsOneWidget);

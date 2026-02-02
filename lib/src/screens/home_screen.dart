@@ -29,6 +29,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Ennaa Fffeeelinggu'),
       ),
+      floatingActionButton: FloatingActionButton(
+                          onPressed: () async {
+                            await showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              useSafeArea: true,
+                              builder: (context) => const EntryScreen(),
+                            );          // Refresh entries after the EntryScreen is dismissed
+          Provider.of<JournalProvider>(context, listen: false).fetchEntries();
+        },
+        child: const Icon(Icons.add),
+      ),
       body: Consumer<JournalProvider>(
         builder: (context, journalProvider, child) {
           final latestEntry = journalProvider.entries.isNotEmpty ? journalProvider.entries.first : null;
@@ -76,18 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     textAlign: TextAlign.center,
                   ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () async {
-                    await showModalBottomSheet(
-                      context: context,
-                      useSafeArea: false,
-                      builder: (context) => const EntryScreen(),
-                    );
-                    // Refresh entries after the EntryScreen is dismissed
-                    Provider.of<JournalProvider>(context, listen: false).fetchEntries();
-                  },
-                  child: const Text('Add New Entry'),
-                ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {

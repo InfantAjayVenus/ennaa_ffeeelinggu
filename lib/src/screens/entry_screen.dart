@@ -21,65 +21,60 @@ class _EntryScreenState extends State<EntryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: IntrinsicHeight(
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'New Entry',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    return Column(
+      mainAxisSize: MainAxisSize.min, // Ensure column takes minimum space
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'New Entry',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              MoodSelector(
+                onMoodSelected: (mood) {
+                  setState(() {
+                    selectedMood = mood;
+                  });
+                },
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    MoodSelector(
-                      onMoodSelected: (mood) {
-                        setState(() {
-                          selectedMood = mood;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    TextField(
-                      controller: activityController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Activity',
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        final journalProvider =
-                            Provider.of<JournalProvider>(context, listen: false);
-                        journalProvider.addEntry(
-                          JournalEntry(
-                            mood: selectedMood,
-                            activity: activityController.text,
-                            timestamp: DateTime.now(),
-                          ),
-                        );
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Entry saved!'),
-                          ),
-                        );
-                      },
-                      child: const Text('Save'),
-                    ),
-                  ],
+              const SizedBox(height: 20),
+              TextField(
+                controller: activityController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Activity',
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  final journalProvider =
+                      Provider.of<JournalProvider>(context, listen: false);
+                  journalProvider.addEntry(
+                    JournalEntry(
+                      mood: selectedMood,
+                      activity: activityController.text,
+                      timestamp: DateTime.now(),
+                    ),
+                  );
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Entry saved!'),
+                    ),
+                  );
+                },
+                child: const Text('Save'),
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
