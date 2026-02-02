@@ -1,6 +1,5 @@
 import 'package:ennaa_ffeeelinggu/src/screens/home_screen.dart';
 import 'package:ennaa_ffeeelinggu/src/providers/journal_provider.dart';
-import 'package:ennaa_ffeeelinggu/src/screens/entry_screen.dart';
 import 'package:ennaa_ffeeelinggu/src/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
