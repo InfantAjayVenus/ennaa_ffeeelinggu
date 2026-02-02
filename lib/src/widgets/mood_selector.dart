@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import for HapticFeedback
 
 class MoodSelector extends StatefulWidget {
   final Function(int) onMoodSelected;
@@ -30,18 +31,27 @@ class _MoodSelectorState extends State<MoodSelector> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: _emojis.entries.map((entry) {
+        final bool isSelected = _selectedMood == entry.key;
         return GestureDetector(
           onTap: () {
+            HapticFeedback.lightImpact(); // Haptic feedback
             setState(() {
               _selectedMood = entry.key;
             });
             widget.onMoodSelected(entry.key);
           },
-          child: Text(
-            entry.value,
-            style: TextStyle(
-              fontSize: 30,
-              color: _selectedMood == entry.key ? Colors.blue : Colors.grey,
+          child: AnimatedScale(
+            scale: isSelected ? 1.5 : 1.0, // Scale animation for visual feedback
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOutBack,
+            child: AnimatedDefaultTextStyle(
+              style: TextStyle(
+                fontSize: isSelected ? 36 : 30, // Font size animation
+                color: isSelected ? Colors.blue : Colors.grey,
+              ),
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeOutBack,
+              child: Text(entry.value),
             ),
           ),
         );
