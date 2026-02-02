@@ -2,28 +2,36 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_local_notifications_platform_interface/flutter_local_notifications_platform_interface.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+@pragma('vm:entry-point')
+void onDidReceiveBackgroundNotificationResponse(
+  NotificationResponse notificationResponse,
+) {
+  // Handle notification tapped logic when app is in background
+}
+
 class NotificationService {
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   NotificationService({FlutterLocalNotificationsPlugin? plugin})
-      : flutterLocalNotificationsPlugin =
-            plugin ?? FlutterLocalNotificationsPlugin();
+    : flutterLocalNotificationsPlugin =
+          plugin ?? FlutterLocalNotificationsPlugin();
 
   Future<void> initialize() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
-    );
+          requestAlertPermission: true,
+          requestBadgePermission: true,
+          requestSoundPermission: true,
+        );
 
-    const InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsIOS,
-    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+          android: initializationSettingsAndroid,
+          iOS: initializationSettingsIOS,
+        );
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
@@ -34,42 +42,69 @@ class NotificationService {
   }
 
   void onDidReceiveNotificationResponse(
-      NotificationResponse notificationResponse) async {
+    NotificationResponse notificationResponse,
+  ) async {
     // Handle notification tapped logic
   }
 
-  void onDidReceiveBackgroundNotificationResponse(
-      NotificationResponse notificationResponse) {
-    // Handle notification tapped logic when app is in background
-  }
-
   Future<void> scheduleHourlyReminder() async {
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      0,
-      'Time to log your mood!',
-      'How are you feeling and what are you doing?',
-      _nextInstanceOfHour(),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'hourly_journal_channel',
-          'Hourly Journal Reminders',
-          channelDescription: 'Reminders to log your mood and activity hourly',
-          importance: Importance.high,
-          priority: Priority.high,
+    try {
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'Time to log your mood!',
+        'How are you feeling and what are you doing?',
+        _nextInstanceOfHour(),
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'hourly_journal_channel',
+            'Hourly Journal Reminders',
+            channelDescription:
+                'Reminders to log your mood and activity hourly',
+            importance: Importance.high,
+            priority: Priority.high,
+          ),
+          iOS: DarwinNotificationDetails(),
         ),
-        iOS: DarwinNotificationDetails(),
-      ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time,
+      );
+    } catch (e) {
+      // Fallback to inexact scheduling if exact alarms are not permitted
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'Time to log your mood!',
+        'How are you feeling and what are you doing?',
+        _nextInstanceOfHour(),
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'hourly_journal_channel',
+            'Hourly Journal Reminders',
+            channelDescription:
+                'Reminders to log your mood and activity hourly',
+            importance: Importance.low,
+            priority: Priority.low,
+          ),
+          iOS: DarwinNotificationDetails(),
+        ),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time,
+      );
+    }
   }
 
   tz.TZDateTime _nextInstanceOfHour() {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate =
-        tz.TZDateTime(tz.local, now.year, now.month, now.day, now.hour + 1);
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      now.hour + 1,
+    );
     return scheduledDate;
   }
 }
