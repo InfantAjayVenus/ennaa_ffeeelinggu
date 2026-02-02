@@ -80,8 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () async {
                     await showModalBottomSheet(
                       context: context,
-                      isScrollControlled: true,
-                      useSafeArea: true,
+                      useSafeArea: false,
                       builder: (context) => const EntryScreen(),
                     );
                     // Refresh entries after the EntryScreen is dismissed
