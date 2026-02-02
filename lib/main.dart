@@ -1,5 +1,5 @@
-import 'package:ennaa_ffeeelinggu/src/screens/home_screen.dart';
 import 'package:ennaa_ffeeelinggu/src/providers/journal_provider.dart';
+import 'package:ennaa_ffeeelinggu/src/screens/main_screen.dart';
 import 'package:ennaa_ffeeelinggu/src/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const HomeScreen(),
+      home: const MainScreen(),
     );
   }
 }

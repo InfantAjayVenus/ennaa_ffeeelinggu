@@ -21,20 +21,25 @@ class _EntryScreenState extends State<EntryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min, // Ensure column takes minimum space
-      children: [
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            'New Entry',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    return Scaffold(
+      appBar: null, // No AppBar for bottom sheet
+      resizeToAvoidBottomInset: true, // Allow content to resize when keyboard appears
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 16.0,
+            left: 16.0,
+            right: 16.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16.0, // Adjust for keyboard
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisSize: MainAxisSize.min, // Take minimum space
             children: [
+              const Text(
+                'New Entry',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
               MoodSelector(
                 onMoodSelected: (mood) {
                   setState(() {
@@ -74,7 +79,7 @@ class _EntryScreenState extends State<EntryScreen> {
             ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

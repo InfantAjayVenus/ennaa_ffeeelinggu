@@ -18,9 +18,6 @@ void main() {
   group('EntryScreen', () {
     // Helper function to pump the EntryScreen with necessary providers
     Future<void> pumpEntryScreen(WidgetTester tester, {Key? key}) async {
-      final NotificationService notificationService = NotificationService();
-      await notificationService.initialize();
-      await notificationService.scheduleHourlyReminder();
       await tester.pumpWidget(
         ChangeNotifierProvider(
           create: (context) => JournalProvider(),
