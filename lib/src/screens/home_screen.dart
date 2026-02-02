@@ -77,11 +77,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const EntryScreen()),
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      useSafeArea: true,
+                      builder: (context) => const EntryScreen(),
                     );
+                    // Refresh entries after the EntryScreen is dismissed
+                    Provider.of<JournalProvider>(context, listen: false).fetchEntries();
                   },
                   child: const Text('Add New Entry'),
                 ),

@@ -55,21 +55,19 @@ void main() {
       expect(find.text('Activity: Working'), findsOneWidget);
     });
 
-    testWidgets('Tapping "Add New Entry" navigates to EntryScreen', (WidgetTester tester) async {
+    testWidgets('Tapping "Add New Entry" opens EntryScreen as a modal', (WidgetTester tester) async {
       when(mockDatabaseService.getEntries()).thenAnswer((_) async => []);
 
       await tester.pumpWidget(
         ChangeNotifierProvider<JournalProvider>.value(
           value: journalProvider,
-          child: MaterialApp(home: const HomeScreen(), routes: {
-            '/entry': (context) => const EntryScreen(),
-          }),
+          child: const MaterialApp(home: HomeScreen()),
         ),
       );
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('Add New Entry'));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(); // Wait for the modal to appear
 
       expect(find.byType(EntryScreen), findsOneWidget);
     });
