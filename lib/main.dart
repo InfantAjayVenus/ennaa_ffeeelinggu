@@ -31,8 +31,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ennaa Fffeeelinggu',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFFFCC00)),
+        brightness: Brightness.light,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFFFCC00),
+          brightness: Brightness.light,
+        ),
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFFFCC00),
+          brightness: Brightness.dark,
+        ),
+      ),
+      themeMode: ThemeMode.system,
       home: const MainScreen(),
     );
   }
