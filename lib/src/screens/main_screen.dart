@@ -51,20 +51,28 @@ class _MainScreenState extends State<MainScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: _onItemTapped,
+        indicatorColor: Theme.of(context).colorScheme.primary,
+        destinations: <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.home,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            icon: const Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.history,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            icon: const Icon(Icons.history),
             label: 'History',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).primaryColor,
-        onTap: _onItemTapped,
       ),
     );
   }
