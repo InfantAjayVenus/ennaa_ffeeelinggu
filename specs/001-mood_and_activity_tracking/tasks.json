@@ -6,8 +6,8 @@
             "Verify `flutter pub get` completes without errors.",
             "Verify `flutter analyze` passes without errors."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "002_project_structure",
@@ -16,8 +16,8 @@
             "Verify the directory structure matches the plan.",
             "Write a widget test to verify that the main app widget can be rendered without errors."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "003_data_models",
@@ -25,8 +25,8 @@
         "tests": [
             "Unit test for `JournalEntry` `toMap` and `fromMap`."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "004_database_service",
@@ -35,8 +35,8 @@
             "Unit test for `DatabaseService.addEntry` to correctly insert a record.",
             "Unit test for `DatabaseService.getEntries` to retrieve all records in the correct order."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "005_entry_screen_ui",
@@ -46,8 +46,8 @@
             "Widget test for `EntryScreen` to verify it contains a `MoodSelector`, a `TextField`, and a `Button`.",
             "Widget test for `EntryScreen` to verify that the state is updated when inputs change."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "006_save_journal_entry",
@@ -56,8 +56,8 @@
             "Unit test for `JournalProvider` to verify it calls `DatabaseService.addEntry`.",
             "Integration test: Tap 'Save' on `EntryScreen` and verify the data is present in the database."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "007_view_journal_history",
@@ -66,8 +66,8 @@
             "Widget test for `HistoryScreen` to verify it correctly displays a list of mock entries.",
             "Integration test: Add an entry on the `EntryScreen`, navigate to `HistoryScreen`, and verify the new entry is displayed at the top of the list."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "008_home_screen_dashboard",
@@ -77,8 +77,8 @@
             "Widget test for `HomeScreen` to verify navigation buttons exist and trigger navigation.",
             "Integration test: Verify tapping 'Add Entry' goes to `EntryScreen` and 'View History' goes to `HistoryScreen`."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "009_hourly_notifications",
@@ -86,8 +86,8 @@
         "tests": [
             "Unit test for `NotificationService` to verify `initialize` and `scheduleHourlyReminder` methods are called correctly."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     },
     {
         "name": "010_app_finalization",
@@ -95,7 +95,7 @@
         "tests": [
             "Unit test for EmojiHelper to verify correct emoji is returned for each mood score."
         ],
-        "status": "NOT_STARTED",
-        "passes": false
+        "status": "COMPLETE",
+        "passes": true
     }
 ]

@@ -1,0 +1,100 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import for HapticFeedback
+
+class MoodSelector extends StatefulWidget {
+  final Function(int) onMoodSelected;
+
+  const MoodSelector({super.key, required this.onMoodSelected});
+
+  @override
+  State<MoodSelector> createState() => _MoodSelectorState();
+}
+
+class _MoodSelectorState extends State<MoodSelector> {
+  int _selectedMood = 5;
+
+  final Map<int, String> _emojis = {
+    1: '😭',
+    2: '😞',
+    3: '😧',
+    4: '😦',
+    5: '😐',
+    6: '😏',
+    7: '🙂',
+    8: '😀',
+    9: '😁',
+    10: '😂',
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    // Split emojis into two rows
+    final List<MapEntry<int, String>> firstRowEmojis = _emojis.entries.take(5).toList();
+    final List<MapEntry<int, String>> secondRowEmojis = _emojis.entries.skip(5).take(5).toList();
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: firstRowEmojis.map((entry) => _buildEmojiWidget(entry)).toList(),
+        ),
+        const SizedBox(height: 10), // Space between rows
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: secondRowEmojis.map((entry) => _buildEmojiWidget(entry)).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmojiWidget(MapEntry<int, String> entry) {
+    final bool isSelected = _selectedMood == entry.key;
+    // Calculate size needed to prevent layout shifts.
+    // Base font size is 30, scaled to 1.5, so max size is 30 * 1.5 = 45.
+    // Add some padding for visual comfort.
+    final double baseSize = 30.0;
+    final double scaledSize = baseSize * 1.5;
+    final double containerSize = scaledSize + 10.0; // Add some buffer
+
+    return SizedBox(
+      width: containerSize,
+      height: containerSize,
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            HapticFeedback.lightImpact(); // Haptic feedback
+            setState(() {
+              _selectedMood = entry.key;
+            });
+            widget.onMoodSelected(entry.key);
+          },
+          child: ColorFiltered(
+            colorFilter: isSelected
+                ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
+                : const ColorFilter.matrix(<double>[
+                    0.2126, 0.7152, 0.0722, 0, 0,
+                    0.2126, 0.7152, 0.0722, 0, 0,
+                    0.2126, 0.7152, 0.0722, 0, 0,
+                    0,      0,      0,      1, 0,
+                  ]),
+            child: AnimatedScale(
+              scale: isSelected ? 1.5 : 1.0, // Scale animation for visual feedback
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeOutBack,
+              child: AnimatedDefaultTextStyle(
+                style: TextStyle(
+                  fontSize: isSelected ? 36 : 30, // Font size animation
+                  color: isSelected ? Colors.blue : Colors.grey,
+                ),
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOutBack,
+                child: Text(entry.value),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
